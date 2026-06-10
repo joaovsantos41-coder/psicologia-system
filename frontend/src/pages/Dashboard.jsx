@@ -4,7 +4,7 @@ import { jsPDF } from 'jspdf'
 
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from 'recharts'
 
-function Dashboard() {
+function Dashboard({ setLogged }) {
 
   const [screen, setScreen] = useState('dashboard')
   const [patients, setPatients] = useState([])
@@ -32,6 +32,15 @@ function Dashboard() {
 
   const [editingConsultationId,
     setEditingConsultationId] = useState(null)
+
+
+  function logout() {
+
+    localStorage.removeItem('token')
+
+    setLogged(false)
+
+  }
 
   async function loadPatients() {
 
@@ -552,6 +561,10 @@ function Dashboard() {
 
         <button onClick={() => setScreen('financial')}>
           💰 Financeiro
+        </button>
+
+        <button onClick={logout}>
+          🚪 Sair
         </button>
 
       </aside>

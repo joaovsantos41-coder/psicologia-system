@@ -8,9 +8,9 @@ function App() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
- const [logged, setLogged] = useState(
-  localStorage.getItem('token') ? true : false
-)
+  const [logged, setLogged] = useState(
+    localStorage.getItem('token') ? true : false
+  )
 
   async function handleLogin() {
 
@@ -30,6 +30,8 @@ function App() {
       })
 
       const data = await response.json()
+
+      console.log(data)
 
       if (data.token) {
 
@@ -53,7 +55,11 @@ function App() {
   }
 
   if (logged) {
-    return <Dashboard />
+    return (
+      <Dashboard
+        setLogged={setLogged}
+      />
+    )
   }
 
   return (

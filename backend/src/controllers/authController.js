@@ -46,6 +46,8 @@ const login = async (req, res) => {
       where: { email }
     })
 
+console.log(user)
+
     if (!user) {
       return res.status(404).json({
         error: 'Usuário não encontrado'
@@ -53,6 +55,8 @@ const login = async (req, res) => {
     }
 
     const passwordMatch = await bcrypt.compare(password, user.password)
+    
+    console.log('Senha confere?', passwordMatch)
 
     if (!passwordMatch) {
       return res.status(401).json({
